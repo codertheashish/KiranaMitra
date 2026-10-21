@@ -65,3 +65,20 @@ Site and API deploy from this one repo. No environment variables or secrets are 
 - The API is stateless: it only computes the reorder list from what the browser sends.
 - Stock corrections made with **Edit** are not written to the activity log.
 - No barcode scanning and no AI features yet.
+
+
+## Kaggle CSV dataset insights (local import)
+
+The **Dataset Insights** tab lets you select a retail inventory CSV from your computer. The app parses it in the browser, shows a preview, validates required columns (`Product ID`, `Inventory Level`, and `Units Sold`), and calculates summaries only after you confirm import. For forecast-based restock candidates, `Demand Forecast` is also required. The imported historical dataset is kept separate from the live shop inventory.
+
+### Import your Kaggle file
+
+1. Download the CSV from its original Kaggle page and keep a note of the exact source URL, author, and license. Do not claim the dataset is real or synthetic unless its source confirms that.
+2. Start the app with `python dev_server.py` and open `http://localhost:3000`.
+3. Open **Dataset Insights** → **Choose CSV** → select `retail_store_inventory.csv`.
+4. Review the preview and data-quality notes, then click **Confirm import**.
+5. Add the verified Kaggle URL and verified author/license notes in the Dataset provenance section.
+
+The full CSV is processed locally in your browser and is not uploaded to the API. Only aggregated summary statistics and a small list of restock candidates are saved in this browser's localStorage. This means the imported dataset insights are browser/device-specific and do not automatically sync to another device. The current implementation is rule-based; it does not train a machine-learning model. The restock gap is `ceil(max(0, Demand Forecast - Inventory Level))` for each historical record where both values are numeric. Treat this as a simple historical comparison, not a guaranteed order quantity.
+
+The importer currently accepts CSV files up to 25 MB and skips malformed-width rows. Numeric rows with missing/invalid inventory or sales values and records without a Product ID are excluded from the calculations and counted in the quality summary.
