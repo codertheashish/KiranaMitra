@@ -82,3 +82,14 @@ The **Dataset Insights** tab lets you select a retail inventory CSV from your co
 The full CSV is processed locally in your browser and is not uploaded to the API. Only aggregated summary statistics and a small list of restock candidates are saved in this browser's localStorage. This means the imported dataset insights are browser/device-specific and do not automatically sync to another device. The current implementation is rule-based; it does not train a machine-learning model. The restock gap is `ceil(max(0, Demand Forecast - Inventory Level))` for each historical record where both values are numeric. Treat this as a simple historical comparison, not a guaranteed order quantity.
 
 The importer currently accepts CSV files up to 25 MB and skips malformed-width rows. Numeric rows with missing/invalid inventory or sales values and records without a Product ID are excluded from the calculations and counted in the quality summary.
+
+
+## Optional automatic dataset loading
+
+To have Dataset Insights load the historical CSV automatically on the local app and deployment, place the file at:
+
+`public/data/retail_store_inventory.csv`
+
+Create the `public/data/` folder if it does not exist. The CSV is intentionally not bundled in this source ZIP; add the dataset yourself only after checking its licence and whether redistribution is allowed. When the file is absent, Dataset Insights continues to offer the Choose CSV option. The historical dataset is analyzed separately and never replaces live shop inventory.
+
+The Dataset Insights panel also uses normal page scrolling so the confirmation/action area remains reachable on shorter screens.

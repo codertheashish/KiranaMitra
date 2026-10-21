@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#15803d">
+  <meta name="description" content="KiranaMitra - Smart Stock. Simple Dukaan.">
+  <title>KiranaMitra - Smart Stock. Simple Dukaan.</title>
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Icon sprite (inline SVG, no external files, works offline) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4.5M12 17.5h.01"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M9 12h6M9 16h4"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M3 4h3l2.5 11h10l2-8H7"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></symbol>
+    <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.7 5.7l12.6 12.6"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 10-2.3 6"/><path d="M20 4v7h-7"/></symbol>
+    <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.6" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  </svg>
+
+  <div class="app">
+
+    <!-- ===== Header ===== -->
+    <header class="topbar">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 40 40" role="img" aria-label="KiranaMitra logo">
+          <rect width="40" height="40" rx="11" fill="#15803d"/>
+          <path d="M8.5 15.5L11.6 8.5h16.8l3.1 7z" fill="#fff"/>
+          <path d="M8.5 15.5a3.8 3.8 0 007.5 0 3.8 3.8 0 007.5 0 3.8 3.8 0 007.5 0z" fill="#fbbf24"/>
+          <rect x="10.5" y="19" width="19" height="12" rx="1.6" fill="#fff"/>
+          <rect x="17" y="23" width="6" height="8" rx="1" fill="#15803d"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">KiranaMitra</span>
+          <span class="brand-tag">Smart Stock. Simple Dukaan.</span>
+        </div>
+      </div>
+
+      <nav class="tabs" role="tablist" aria-label="Main sections">
+        <button id="tabbtn-overview" class="tab" role="tab" aria-selected="true" aria-controls="panel-overview" data-tab="overview" type="button">
+          <svg class="ic" aria-hidden="true"><use href="#i-grid"/></svg><span>Overview</span>
+        </button>
+        <button id="tabbtn-inventory" class="tab" role="tab" aria-selected="false" aria-controls="panel-inventory" data-tab="inventory" type="button">
+          <svg class="ic" aria-hidden="true"><use href="#i-box"/></svg><span>Inventory</span>
+        </button>
+        <button id="tabbtn-low" class="tab" role="tab" aria-selected="false" aria-controls="panel-low" data-tab="low" type="button">
+          <svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg><span>Low Stock</span>
+          <b id="badge-low" class="badge" hidden>0</b>
+        </button>
+        <button id="tabbtn-reorder" class="tab" role="tab" aria-selected="false" aria-controls="panel-reorder" data-tab="reorder" type="button">
+          <svg class="ic" aria-hidden="true"><use href="#i-list"/></svg><span>Reorder List</span>
+        </button>
+        <button id="tabbtn-dataset" class="tab" role="tab" aria-selected="false" aria-controls="panel-dataset" data-tab="dataset" type="button">
+          <svg class="ic" aria-hidden="true"><use href="#i-db"/></svg><span>Dataset Insights</span>
+        </button>
+      </nav>
+
+      <div class="top-actions">
+        <span id="net" class="net" role="status">Online</span>
+        <button id="add-btn" class="btn primary" type="button">
+          <svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg><span>Add<span class="long"> Product</span></span>
+        </button>
+        <div class="menu-wrap">
+          <button id="menu-btn" class="btn icon" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="More options" title="More options">
+            <svg class="ic" aria-hidden="true"><use href="#i-more"/></svg>
+          </button>
+          <div id="menu" class="menu" role="menu" hidden>
+            <button id="menu-demo" class="menu-item" role="menuitem" type="button"><svg class="ic" aria-hidden="true"><use href="#i-db"/></svg>Load demo data</button>
+            <button id="menu-reset" class="menu-item danger" role="menuitem" type="button"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg>Reset all data</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== Dashboard numbers ===== -->
+    <section class="stats" aria-label="Dashboard overview">
+      <button class="stat" type="button" data-goto="inventory">
+        <span class="stat-icon green"><svg class="ic" aria-hidden="true"><use href="#i-box"/></svg></span>
+        <span class="stat-body"><b id="stat-products">0</b><small>Total Products</small></span>
+      </button>
+      <button class="stat" type="button" data-goto="low" data-filter="all">
+        <span class="stat-icon amber"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg></span>
+        <span class="stat-body"><b id="stat-low">0</b><small>Low Stock Items</small></span>
+      </button>
+      <button class="stat" type="button" data-goto="low" data-filter="out">
+        <span class="stat-icon red"><svg class="ic" aria-hidden="true"><use href="#i-ban"/></svg></span>
+        <span class="stat-body"><b id="stat-out">0</b><small>Out of Stock</small></span>
+      </button>
+      <button class="stat" type="button" data-goto="inventory">
+        <span class="stat-icon blue"><svg class="ic" aria-hidden="true"><use href="#i-layers"/></svg></span>
+        <span class="stat-body"><b id="stat-units">0</b><small>Total Units in Stock</small></span>
+      </button>
+    </section>
+
+    <!-- ===== Tab panels ===== -->
+    <main>
+
+      <!-- Overview -->
+      <section id="panel-overview" class="panel" role="tabpanel" aria-labelledby="tabbtn-overview">
+        <div id="ov-empty" class="onboard" hidden>
+          <svg class="ic big" aria-hidden="true"><use href="#i-box"/></svg>
+          <h2>Welcome to KiranaMitra</h2>
+          <p>Add your first product to start tracking stock, or load sample data to look around.</p>
+          <div class="btn-row">
+            <button id="ob-add" class="btn primary" type="button"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg><span>Add your first product</span></button>
+            <button id="ob-demo" class="btn" type="button"><svg class="ic" aria-hidden="true"><use href="#i-db"/></svg><span>Load demo data</span></button>
+          </div>
+        </div>
+
+        <div id="ov-grid" class="ov-grid">
+          <div class="card">
+            <div class="card-head">
+              <h2>Needs attention</h2>
+              <button id="ov-viewall" class="link-btn" type="button" hidden>View all <span id="ov-viewall-count"></span></button>
+            </div>
+            <div id="ov-attention" class="card-body"></div>
+          </div>
+
+          <div class="ov-side">
+            <div class="card">
+              <div class="card-head"><h2>Stock health</h2></div>
+              <div class="card-pad">
+                <div class="hbar" role="img" id="hbar" aria-label="Stock health">
+                  <span id="hb-ok" class="seg ok"></span><span id="hb-low" class="seg low"></span><span id="hb-out" class="seg out"></span>
+                </div>
+                <ul class="legend">
+                  <li><i class="dot ok"></i>Healthy <b id="hl-ok">0</b></li>
+                  <li><i class="dot low"></i>Low <b id="hl-low">0</b></li>
+                  <li><i class="dot out"></i>Out <b id="hl-out">0</b></li>
+                </ul>
+                <div class="btn-row">
+                  <button id="ov-sell" class="btn primary" type="button"><svg class="ic" aria-hidden="true"><use href="#i-cart"/></svg><span>Record sale</span></button>
+                  <button id="ov-restock" class="btn" type="button"><svg class="ic" aria-hidden="true"><use href="#i-up"/></svg><span>Restock</span></button>
+                </div>
+              </div>
+            </div>
+            <div class="card grow">
+              <div class="card-head"><h2>Recent activity</h2></div>
+              <div id="ov-history" class="card-body"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Inventory -->
+      <section id="panel-inventory" class="panel boxed" role="tabpanel" aria-labelledby="tabbtn-inventory" hidden>
+        <div class="toolbar">
+          <label class="search">
+            <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg>
+            <input id="search" type="search" placeholder="Search by name or SKU" aria-label="Search products" autocomplete="off">
+          </label>
+          <span id="inv-count" class="muted"></span>
+        </div>
+        <div class="list-head cols-inv" aria-hidden="true"><span>Product</span><span>In stock</span><span>Reorder at</span><span>Status</span><span>Actions</span></div>
+        <div id="inventory" class="list" role="list"></div>
+      </section>
+
+      <!-- Low stock -->
+      <section id="panel-low" class="panel boxed" role="tabpanel" aria-labelledby="tabbtn-low" hidden>
+        <div class="toolbar">
+          <div class="chips" role="group" aria-label="Filter low-stock items">
+            <button id="chip-all" class="chip-btn" type="button" data-filter="all" aria-pressed="true">All <b id="cc-all">0</b></button>
+            <button id="chip-low" class="chip-btn" type="button" data-filter="low" aria-pressed="false">Low <b id="cc-low">0</b></button>
+            <button id="chip-out" class="chip-btn" type="button" data-filter="out" aria-pressed="false">Out of stock <b id="cc-out">0</b></button>
+          </div>
+        </div>
+        <div class="list-head cols-low" aria-hidden="true"><span>Product</span><span>In stock</span><span>Reorder at</span><span>Short by</span><span>Status</span><span>Action</span></div>
+        <div id="low-list" class="list" role="list"></div>
+      </section>
+
+      <!-- Reorder list -->
+      <section id="panel-reorder" class="panel boxed" role="tabpanel" aria-labelledby="tabbtn-reorder" hidden>
+        <div class="toolbar">
+          <span id="ro-count" class="muted"></span>
+          <button id="copy-btn" class="btn primary" type="button"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span>Copy Reorder List</span></button>
+        </div>
+        <div class="list-head cols-reorder" aria-hidden="true"><span>Product</span><span>In stock</span><span>Reorder at</span><span>Order qty</span></div>
+        <div id="reorder-list" class="list" role="list"></div>
+        <div id="server-status" class="server" role="status">
+          <span id="server-text"></span>
+          <button id="server-retry" class="link-btn" type="button">Check again</button>
+        </div>
+      </section>
+
+      <!-- Kaggle dataset import and insights -->
+      <section id="panel-dataset" class="panel boxed dataset-panel" role="tabpanel" aria-labelledby="tabbtn-dataset" hidden>
+        <div class="dataset-intro">
+          <div><p class="eyebrow">HISTORICAL DATA ANALYSIS</p><h2>Kaggle Retail Inventory Dataset</h2>
+            <p>Import the CSV you downloaded. Historical dataset records stay separate from your live shop inventory.</p></div>
+          <div class="dataset-actions"><label class="btn primary file-button" for="dataset-file"><svg class="ic" aria-hidden="true"><use href="#i-up"/></svg><span>Choose CSV</span></label><input id="dataset-file" type="file" accept=".csv,text/csv" hidden><button id="dataset-clear" class="btn" type="button" disabled>Clear imported data</button></div>
+        </div>
+        <p id="dataset-message" class="dataset-message" role="status">No dataset imported yet. Choose <code>retail_store_inventory.csv</code> to begin.</p>
+        <div id="dataset-preview-wrap" hidden>
+          <div class="dataset-section-head"><h3>Preview before import</h3><span id="dataset-preview-count" class="muted"></span></div>
+          <div id="dataset-columns" class="dataset-columns"></div>
+          <div class="table-scroll"><table class="dataset-table"><thead id="dataset-preview-head"></thead><tbody id="dataset-preview-body"></tbody></table></div>
+          <div class="dataset-confirm-row"><span id="dataset-quality" class="muted"></span><button id="dataset-import" class="btn primary" type="button">Confirm import</button></div>
+        </div>
+        <div id="dataset-results" hidden>
+          <div class="dataset-section-head"><h3>Dataset summary</h3><span id="dataset-imported-at" class="muted"></span></div>
+          <div class="dataset-metrics">
+            <article class="dataset-metric"><small>CSV rows</small><strong id="ds-rows">0</strong></article>
+            <article class="dataset-metric"><small>Distinct products</small><strong id="ds-products">0</strong></article>
+            <article class="dataset-metric"><small>Inventory units</small><strong id="ds-inventory">0</strong></article>
+            <article class="dataset-metric"><small>Units sold</small><strong id="ds-sold">0</strong></article>
+            <article class="dataset-metric"><small>Units ordered</small><strong id="ds-ordered">0</strong></article>
+          </div>
+          <div class="dataset-two-col">
+            <section class="dataset-card"><h3>Category summary</h3><div class="table-scroll"><table class="dataset-table"><thead><tr><th>Category</th><th>Rows</th><th>Inventory</th><th>Sold</th></tr></thead><tbody id="ds-category-body"></tbody></table></div></section>
+            <section class="dataset-card"><h3>Restock candidates</h3><p class="muted">Rule: recommend the positive difference between Demand Forecast and Inventory Level for each historical record. This is a rule-based indicator, not an AI prediction.</p><div class="table-scroll"><table class="dataset-table"><thead><tr><th>Product ID</th><th>Category</th><th>Inventory</th><th>Forecast</th><th>Gap</th></tr></thead><tbody id="ds-restock-body"></tbody></table></div></section>
+          </div>
+          <section class="dataset-card dataset-meta"><h3>Dataset provenance</h3><p><b>File:</b> <span id="ds-file-name">retail_store_inventory.csv</span></p><p id="ds-imported-at" class="muted"></p><p><b>Source:</b> Kaggle download provided by the project owner. Verify and record the exact dataset URL, author, and license before presenting.</p><label>Verified Kaggle URL (optional)<input id="ds-source-url" type="url" placeholder="https://www.kaggle.com/datasets/..."></label><label>Author / license notes (optional)<input id="ds-license" type="text" placeholder="Enter only verified source details"></label><button id="ds-save-meta" class="btn" type="button">Save source notes</button><p id="ds-meta-status" class="muted" role="status"></p><p class="hint">Only summary statistics and a small set of aggregated insights are saved in this browser. The full CSV is processed locally and is not uploaded to the server.</p></section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      KiranaMitra &middot; Data is saved on this device and works offline &middot;
+      Preeti Sharma, Ashish Kumar Prajapati, Anirudh Gupta, Vivek Gupta
+    </footer>
+  </div>
+
+  <!-- ===== Modal: Add product ===== -->
+  <div id="modal-add" class="backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="add-title">
+      <div class="modal-head"><h2 id="add-title">Add product</h2><button class="btn icon ghost" type="button" data-close aria-label="Close"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+      <form id="add-form" novalidate>
+        <label>Product name
+          <input id="ad-name" type="text" autocomplete="off" placeholder="e.g. Aashirvaad Atta 5kg">
+        </label>
+        <label>SKU (unique code)
+          <input id="ad-sku" type="text" autocomplete="off" placeholder="e.g. ATTA-5KG">
+        </label>
+        <div class="two">
+          <label>Current quantity
+            <input id="ad-qty" type="number" inputmode="numeric" min="0" step="1" placeholder="20">
+          </label>
+          <label>Reorder threshold
+            <input id="ad-thr" type="number" inputmode="numeric" min="0" step="1" placeholder="5">
+          </label>
+        </div>
+        <p class="hint">You will be alerted when stock falls to the threshold or below.</p>
+        <p id="ad-error" class="error" role="alert"></p>
+        <div class="modal-foot">
+          <button class="btn" type="button" data-close>Cancel</button>
+          <button class="btn primary" type="submit">Add product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Modal: Edit product ===== -->
+  <div id="modal-edit" class="backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="edit-title">
+      <div class="modal-head"><h2 id="edit-title">Edit product</h2><button class="btn icon ghost" type="button" data-close aria-label="Close"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+      <form id="edit-form" novalidate>
+        <label>Product name
+          <input id="ed-name" type="text" autocomplete="off">
+        </label>
+        <label>SKU (cannot be changed)
+          <input id="ed-sku" type="text" readonly tabindex="-1">
+        </label>
+        <div class="two">
+          <label>Current quantity
+            <input id="ed-qty" type="number" inputmode="numeric" min="0" step="1">
+          </label>
+          <label>Reorder threshold
+            <input id="ed-thr" type="number" inputmode="numeric" min="0" step="1">
+          </label>
+        </div>
+        <p id="ed-error" class="error" role="alert"></p>
+        <div class="modal-foot">
+          <button class="btn" type="button" data-close>Cancel</button>
+          <button class="btn primary" type="submit">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Modal: Record sale / Restock ===== -->
+  <div id="modal-move" class="backdrop" hidden>
+    <div class="modal small" role="dialog" aria-modal="true" aria-labelledby="mv-title">
+      <div class="modal-head"><h2 id="mv-title">Record a sale</h2><button class="btn icon ghost" type="button" data-close aria-label="Close"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+      <form id="move-form" novalidate>
+        <label id="mv-pick">Product
+          <select id="mv-product"></select>
+        </label>
+        <p id="mv-hint" class="product-line"></p>
+        <label id="mv-qty-label" for="mv-qty">Quantity sold</label>
+        <div class="stepper">
+          <button class="btn icon" type="button" id="mv-minus" aria-label="Decrease quantity"><svg class="ic" aria-hidden="true"><use href="#i-minus"/></svg></button>
+          <input id="mv-qty" type="number" inputmode="numeric" min="1" step="1" value="1">
+          <button class="btn icon" type="button" id="mv-plus" aria-label="Increase quantity"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        </div>
+        <p id="mv-error" class="error" role="alert"></p>
+        <div class="modal-foot">
+          <button class="btn" type="button" data-close>Cancel</button>
+          <button id="mv-submit" class="btn primary" type="submit">Record sale</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Modal: Confirm ===== -->
+  <div id="modal-confirm" class="backdrop" hidden>
+    <div class="modal small" role="alertdialog" aria-modal="true" aria-labelledby="cf-title" aria-describedby="cf-text">
+      <div class="modal-head"><h2 id="cf-title">Are you sure?</h2><button class="btn icon ghost" type="button" data-close aria-label="Close"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></div>
+      <p id="cf-text" class="confirm-text"></p>
+      <div class="modal-foot">
+        <button class="btn" type="button" data-close>Cancel</button>
+        <button id="cf-ok" class="btn primary" type="button">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="stock.js"></script>
+  <script src="dataset.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
