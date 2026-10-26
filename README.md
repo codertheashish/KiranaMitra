@@ -57,7 +57,7 @@ Site and API deploy from this one repo. No environment variables or secrets are 
 ## Team
 - Preeti Sharma - Frontend
 - Ashish Kumar Prajapati - Project Manager and integration
-- Anirudh Gupta - AI integration
+- Anirudh Gupta - AI Integration
 - Vivek Gupta - Backend
 
 ## Known limits
